@@ -12,12 +12,13 @@ public class ThirdTextView extends TextView {
 		super(context, attrs);
 	}
 	@Override
-	public boolean dispatchTouchEvent(MotionEvent event) {
-		LogUtils.printLog(getClass(), "【实习生】来一任务<%s>:需要{分派}给下一级吗？我想分派，我底下没人了，怎么办？我还是老老实实的干吧", event);
-		return super.dispatchTouchEvent(event);
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		// LogUtils.printLog(getClass(), "【实习生】来一任务<%s>:需要{分派}给下一级吗？我想分派，我底下没人了，怎么办？我还是老老实实的干吧", event);
+		LogUtils.printLog(getClass(), "dispatchTouchEvent", ev);
+		return super.dispatchTouchEvent(ev);
 	}
 	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+	public boolean onTouchEvent(MotionEvent ev) {
 		boolean is=false;
 		String result;
 		if(is){
@@ -25,8 +26,8 @@ public class ThirdTextView extends TextView {
 		}else{
 			result="皇天就负有心人，无人为力，【没解决】。";
 		}
-		LogUtils.printLog(getClass(), "【实习生】自己{处理}任务<%s>:查阅资料，埋头苦干，一声不吭的干了起来。"+result, event);
-	
+		// LogUtils.printLog(getClass(), "【实习生】自己{处理}任务<%s>:查阅资料，埋头苦干，一声不吭的干了起来。"+result, event);
+		LogUtils.printLog(getClass(), "onTouchEvent", ev, is);
 		return is;
 	}
 }

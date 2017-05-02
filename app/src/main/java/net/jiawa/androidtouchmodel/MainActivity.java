@@ -18,14 +18,16 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        LogUtils.printLog(getClass(), "【开发经理】来一任务<%s>:需要{分派}给下一级", ev);
+        // LogUtils.printLog(getClass(), "【开发经理】来一任务<%s>:需要{分派}给下一级", ev);
+        LogUtils.printLog(getClass(), "dispatchTouchEvent", ev);
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        boolean is=true;
-        LogUtils.printLog(getClass(), "【开发经理】自己{处理}任务<%s>:连组长都不会，算了，这任务我还是自己来吧！"+is, event);
+        boolean is = true;
+        // LogUtils.printLog(getClass(), "【开发经理】自己{处理}任务<%s>:连组长都不会，算了，这任务我还是自己来吧！"+is, event);
+        LogUtils.printLog(getClass(), "onTouchEvent", event, is);
         return is;
     }
 }
