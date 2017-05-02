@@ -1,22 +1,119 @@
-<net.jiawa.androidtouchmodel.FirstFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ff0000"
-    >
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/top_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Main"
+                android:layout_gravity="center"/>
 
-    <net.jiawa.androidtouchmodel.SecondRelativeLayout
-        android:layout_width="250dip"
-        android:layout_height="250dip"
-        android:background="#00ff00"
-        android:layout_gravity="center"
-         >
-        <net.jiawa.androidtouchmodel.ThirdTextView
-            android:layout_width="100dip"
-            android:layout_height="100dip"
-            android:background="#0000ff"
-            android:layout_centerInParent="true"
-            />
-    </net.jiawa.androidtouchmodel.SecondRelativeLayout>
+            <CheckBox
+                android:id="@+id/rb_main_touch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击"></CheckBox>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First"
+                android:layout_gravity="center"/>
 
-</net.jiawa.androidtouchmodel.FirstFrameLayout>
+            <CheckBox
+                android:id="@+id/rb_first_inter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="拦截"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/rb_first_touch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击"></CheckBox>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Second"
+                android:layout_gravity="center"/>
+
+            <CheckBox
+                android:id="@+id/rb_second_inter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="拦截"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/rb_second_touch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击"></CheckBox>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Third"
+                android:layout_gravity="center"/>
+
+            <CheckBox
+                android:id="@+id/rb_third_inter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="拦截"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/rb_third_touch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击"></CheckBox>
+        </LinearLayout>
+    </LinearLayout>
+    <net.jiawa.androidtouchmodel.FirstFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ff0000"
+        android:layout_below="@id/top_panel">
+        <net.jiawa.androidtouchmodel.SecondRelativeLayout
+            android:layout_width="250dip"
+            android:layout_height="250dip"
+            android:layout_gravity="center"
+            android:background="#00ff00">
+
+            <net.jiawa.androidtouchmodel.ThirdTextView
+                android:layout_width="100dip"
+                android:layout_height="100dip"
+                android:layout_centerInParent="true"
+                android:background="#0000ff" />
+        </net.jiawa.androidtouchmodel.SecondRelativeLayout>
+
+    </net.jiawa.androidtouchmodel.FirstFrameLayout>
+
+</RelativeLayout>

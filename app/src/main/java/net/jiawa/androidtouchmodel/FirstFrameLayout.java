@@ -31,7 +31,7 @@ public class FirstFrameLayout extends FrameLayout {
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		boolean is=true;
+		boolean is = true;
 		// LogUtils.printLog(getClass(), "【开发组长】自己{处理}任务<%s>:这任务怎么这么难，底下人都不会，还是自己干吧。可是任务能解决嘛？"+is, event);
 		LogUtils.printLog(getClass(), "onTouchEvent", ev, is);
 		return is;

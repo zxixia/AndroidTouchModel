@@ -10,6 +10,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //隐藏标题栏,有效
+        getSupportActionBar().hide();
     }
     /**
      * onInterceptTouchEvent  拦截事件
