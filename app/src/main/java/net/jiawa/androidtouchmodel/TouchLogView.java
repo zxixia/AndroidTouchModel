@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
@@ -58,7 +59,9 @@ public class TouchLogView extends FrameLayout {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (mIsRoot && ev.getAction() == MotionEvent.ACTION_DOWN) {
+            LogUtils.clearCache();
             LogUtils.logEmptyLine();
+            LogUtils.printHead();
         }
         LogUtils.log(mTag, LogUtils.METHOD_DISPATCH_TOUCH_EVENT, ev);
         return super.dispatchTouchEvent(ev);

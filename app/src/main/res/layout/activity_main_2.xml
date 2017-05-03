@@ -24,7 +24,7 @@
         android:paddingTop="100dp"
         app:tvInterceptTouchEvent="false"
         app:tvTouchEvent="false"
-        app:tvTag="111111"
+        app:tvTag="--1--"
         app:tvBackgroundColor="@color/chi_light"
         app:tvIsRoot="true">
         <net.jiawa.androidtouchmodel.TouchLogView
@@ -33,9 +33,9 @@
             android:layout_height="match_parent"
             android:background="@color/cheng_dark"
             android:paddingTop="100dp"
-            app:tvInterceptTouchEvent="true"
+            app:tvInterceptTouchEvent="false"
             app:tvTouchEvent="false"
-            app:tvTag="222222"
+            app:tvTag="--2--"
             app:tvBackgroundColor="@color/cheng_light">
             <net.jiawa.androidtouchmodel.TouchLogView
                 android:id="@+id/touch_3"
@@ -45,7 +45,7 @@
                 android:paddingTop="100dp"
                 app:tvInterceptTouchEvent="false"
                 app:tvTouchEvent="false"
-                app:tvTag="333333"
+                app:tvTag="--3--"
                 app:tvBackgroundColor="@color/lv_light">
                 <net.jiawa.androidtouchmodel.TouchLogView
                     android:id="@+id/touch_4"
@@ -55,7 +55,7 @@
                     android:paddingTop="100dp"
                     app:tvInterceptTouchEvent="false"
                     app:tvTouchEvent="false"
-                    app:tvTag="444444"
+                    app:tvTag="--4--"
                     app:tvBackgroundColor="@color/qing_light">
                 </net.jiawa.androidtouchmodel.TouchLogView>
             </net.jiawa.androidtouchmodel.TouchLogView>

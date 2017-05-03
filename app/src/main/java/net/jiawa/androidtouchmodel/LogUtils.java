@@ -1,9 +1,9 @@
 package net.jiawa.androidtouchmodel;
 
 import android.util.Log;
-import android.util.StringBuilderPrinter;
 import android.view.MotionEvent;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class LogUtils {
@@ -25,13 +25,13 @@ public class LogUtils {
 		String motionEvent = "";
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			motionEvent = "Down";
+			motionEvent = "V  ";
 			break;
 		case MotionEvent.ACTION_MOVE:
-			motionEvent = "Move";
+			motionEvent = "-----";
 			break;
 		case MotionEvent.ACTION_UP:
-			motionEvent = "Up";
+			motionEvent = "A  ";
 			break;
 		default:
 			break;
@@ -87,8 +87,10 @@ public class LogUtils {
 		sb.append(",  ");
 		sb.append(format(method, getMethodLength()));
 		sb.append(",  ");
-		sb.append(format(getEvent(event), getEventLength()));
-		Log.d(TAG, sb.toString());
+		sb.append(format(getEvent(event),5 ));
+		if (canLog(event, sb.toString())) {
+			Log.d(TAG, sb.toString());
+		}
 	}
 
 	public static void log(String name, String method, MotionEvent event, boolean eat) {
@@ -97,13 +99,43 @@ public class LogUtils {
 		sb.append(",  ");
 		sb.append(format(method, getMethodLength()));
 		sb.append(",  ");
-		sb.append(format(getEvent(event), getEventLength()));
+		sb.append(format(getEvent(event), 5));
 		sb.append(",  ");
-		sb.append("Eat: " + eat);
-		Log.d(TAG, sb.toString());
+		sb.append(eat);
+		if (canLog(event, sb.toString())) {
+			Log.d(TAG, sb.toString());
+		}
 	}
 
 	public static void logEmptyLine() {
 		Log.d(TAG, "\n\n\n\n\n");
+	}
+
+	static ArrayList<String> mCache = new ArrayList<String>();
+	public static void clearCache() {
+		mCache.clear();
+	}
+
+	private static boolean canLog(MotionEvent event, String str) {
+		if (event.getAction() != MotionEvent.ACTION_MOVE) {
+			return true;
+		}
+		if (mCache.contains(str)) {
+			return false;
+		}
+		mCache.add(str);
+		return true;
+	}
+
+	public static void printHead() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(format("No", 5));
+		sb.append(",  ");
+		sb.append(format("Method", getMethodLength()));
+		sb.append(",  ");
+		sb.append(format("Event", 5));
+		sb.append(",  ");
+		sb.append("Eat");
+		Log.d(TAG, sb.toString());
 	}
 }
