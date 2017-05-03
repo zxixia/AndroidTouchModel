@@ -59,9 +59,7 @@ public class TouchLogView extends FrameLayout {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (mIsRoot && ev.getAction() == MotionEvent.ACTION_DOWN) {
-            LogUtils.clearCache();
-            LogUtils.logEmptyLine();
-            LogUtils.printHead();
+            LogUtils.clear();
         }
         LogUtils.log(mTag, LogUtils.METHOD_DISPATCH_TOUCH_EVENT, ev);
         return super.dispatchTouchEvent(ev);

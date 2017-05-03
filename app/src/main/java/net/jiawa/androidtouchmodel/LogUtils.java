@@ -9,6 +9,9 @@ import java.util.Locale;
 public class LogUtils {
 
 	final static String TAG = "xixia-1";
+	static int sDonwCount = 0;
+	static int sMoveCount = 0;
+	static int sUpCount = 0;
 
 	public static String METHOD_DISPATCH_TOUCH_EVENT = "dispatchTouchEvent";
 	public static String METHOD_ON_INTERCEPT_TOUCH_EVENT = "onInterceptTouchEvent";
@@ -89,7 +92,7 @@ public class LogUtils {
 		sb.append(",  ");
 		sb.append(format(getEvent(event),5 ));
 		if (canLog(event, sb.toString())) {
-			Log.d(TAG, sb.toString());
+			Log.d(TAG, format(getCount(event), 6) + ",  " + sb.toString());
 		}
 	}
 
@@ -101,18 +104,19 @@ public class LogUtils {
 		sb.append(",  ");
 		sb.append(format(getEvent(event), 5));
 		sb.append(",  ");
-		sb.append(eat);
+		sb.append(eat ? " O " : " X ");
+
 		if (canLog(event, sb.toString())) {
-			Log.d(TAG, sb.toString());
+			Log.d(TAG, format(getCount(event), 6) + ",  " + sb.toString());
 		}
 	}
 
-	public static void logEmptyLine() {
+	private static void logEmptyLine() {
 		Log.d(TAG, "\n\n\n\n\n");
 	}
 
 	static ArrayList<String> mCache = new ArrayList<String>();
-	public static void clearCache() {
+	private static void clearCache() {
 		mCache.clear();
 	}
 
@@ -127,8 +131,10 @@ public class LogUtils {
 		return true;
 	}
 
-	public static void printHead() {
+	private static void printHead() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(format("Count", 6));
+		sb.append(",  ");
 		sb.append(format("No", 5));
 		sb.append(",  ");
 		sb.append(format("Method", getMethodLength()));
@@ -137,5 +143,47 @@ public class LogUtils {
 		sb.append(",  ");
 		sb.append("Eat");
 		Log.d(TAG, sb.toString());
+	}
+
+	private static void clearCount() {
+		sDonwCount = 0;
+		sMoveCount = 0;
+		sUpCount = 0;
+	}
+
+	private static String getCount(MotionEvent event) {
+		int count = 0;
+		switch (event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				sDonwCount++;
+				count = sDonwCount;
+				break;
+			case MotionEvent.ACTION_MOVE:
+				sMoveCount++;
+				count = sMoveCount;
+				break;
+			case MotionEvent.ACTION_UP:
+				sUpCount++;
+				count = sUpCount;
+				break;
+		}
+		String num = format("" + count, 2);
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			return num + " " + " " + " " + " ";
+		}
+		if (event.getAction() == MotionEvent.ACTION_MOVE) {
+			return " " + " " + num + " " + " ";
+		}
+		if (event.getAction() == MotionEvent.ACTION_UP) {
+			return " " + " " + " " + " " + num;
+		}
+		return num;
+	}
+
+	public static void clear() {
+		clearCache();
+		clearCount();
+		logEmptyLine();
+		printHead();
 	}
 }
