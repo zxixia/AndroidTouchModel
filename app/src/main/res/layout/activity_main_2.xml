@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/chi_dark"
-        android:paddingTop="100dp"
+        android:paddingTop="50dp"
         app:tvInterceptTouchEvent="false"
         app:tvTouchEvent="false"
         app:tvTag="@string/name_1"
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cheng_dark"
-            android:paddingTop="100dp"
+            android:paddingTop="50dp"
             app:tvInterceptTouchEvent="false"
             app:tvTouchEvent="false"
             app:tvTag="@string/name_2"
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/lv_dark"
-                android:paddingTop="100dp"
+                android:paddingTop="50dp"
                 app:tvInterceptTouchEvent="false"
                 app:tvTouchEvent="false"
                 app:tvTag="@string/name_3"
@@ -81,11 +81,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/qing_dark"
-                    android:paddingTop="100dp"
+                    android:paddingTop="50dp"
                     app:tvInterceptTouchEvent="false"
                     app:tvTouchEvent="false"
                     app:tvTag="@string/name_4"
                     app:tvBackgroundColor="@color/qing_light">
+                    <net.jiawa.androidtouchmodel.TouchLogView
+                        android:id="@+id/touch_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/zi_dark"
+                        android:paddingTop="50dp"
+                        app:tvInterceptTouchEvent="false"
+                        app:tvTouchEvent="false"
+                        app:tvTag="@string/name_5"
+                        app:tvBackgroundColor="@color/zi_light">
+                    </net.jiawa.androidtouchmodel.TouchLogView>
                 </net.jiawa.androidtouchmodel.TouchLogView>
             </net.jiawa.androidtouchmodel.TouchLogView>
         </net.jiawa.androidtouchmodel.TouchLogView>

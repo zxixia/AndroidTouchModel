@@ -3,10 +3,8 @@ package net.jiawa.androidtouchmodel;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import net.jiawa.androidtouchmodel.bean.Route;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 public class LogUtils {
@@ -96,7 +94,6 @@ public class LogUtils {
 
 	private static boolean canLog(String name, String method, MotionEvent event, String str, int color) {
 		if (event.getAction() != MotionEvent.ACTION_MOVE) {
-			logFirst(name, method, event, color);
 			return true;
 		}
 		if (mCache.contains(str)) {
@@ -124,6 +121,18 @@ public class LogUtils {
 		sDonwCount = 0;
 		sMoveCount = 0;
 		sUpCount = 0;
+	}
+
+	public static int getCountNum(MotionEvent event) {
+		switch (event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				return sDonwCount;
+			case MotionEvent.ACTION_MOVE:
+				return sMoveCount;
+			case MotionEvent.ACTION_UP:
+				return sUpCount;
+		}
+		return 0;
 	}
 
 	private static String getCount(MotionEvent event) {
@@ -159,41 +168,6 @@ public class LogUtils {
 		clearCache();
 		clearCount();
 		logEmptyLine();
-		mFirst.clear();
 		printHead();
-	}
-
-	static HashMap<String, Route> mFirst = new HashMap<String, Route>();
-	public static HashMap<String, Route> getFirst() {
-		return mFirst;
-	}
-
-	private static void logFirst(String name, String method, MotionEvent event, int color) {
-		if (event.getAction() != MotionEvent.ACTION_DOWN) {
-			return;
-		}
-		Route route = mFirst.get(name);
-		if (null == route) {
-			route = new Route(color);
-		}
-
-		updateRoute(route, method, sDonwCount + 1);
-		mFirst.put(name, route);
-	}
-
-	private static void updateRoute(Route route, String method, int count) {
-		if (method.equals(METHOD_DISPATCH_TOUCH_EVENT)) {
-			route.getDispatchTouchEvent().setActive(true);
-			route.getDispatchTouchEvent().setNum(count);
-		}
-		if (method.equals(METHOD_ON_INTERCEPT_TOUCH_EVENT)) {
-			route.getOnInterceptTouchEvent().setActive(true);
-			route.getOnInterceptTouchEvent().setNum(count);
-
-		}
-		if (method.equals(METHOD_ON_TOUCH_EVENT)) {
-			route.getOnTouchEvent().setActive(true);
-			route.getOnTouchEvent().setNum(count);
-		}
 	}
 }

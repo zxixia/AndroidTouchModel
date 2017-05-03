@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
@@ -62,18 +61,60 @@ public class TouchLogView extends FrameLayout {
             LogUtils.clear();
         }
         LogUtils.log(mTag, LogUtils.METHOD_DISPATCH_TOUCH_EVENT, ev, mBackgroundColor);
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            dispatchTouchEventDown.setActive(true);
+            dispatchTouchEventDown.setNum(LogUtils.getCountNum(ev));
+            if (null != mListener) {
+                mListener.onDown();
+            }
+        }
+        if (ev.getAction() == MotionEvent.ACTION_UP) {
+            dispatchTouchEventUp.setActive(true);
+            dispatchTouchEventUp.setNum(LogUtils.getCountNum(ev));
+            if (null != mListener) {
+                mListener.onUp();
+            }
+        }
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         LogUtils.log(mTag, LogUtils.METHOD_ON_INTERCEPT_TOUCH_EVENT, ev, mInterceptTouchEvent, mBackgroundColor);
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            onInterceptTouchEventDown.setActive(true);
+            onInterceptTouchEventDown.setNum(LogUtils.getCountNum(ev));
+            if (null != mListener) {
+                mListener.onDown();
+            }
+        }
+        if (ev.getAction() == MotionEvent.ACTION_UP) {
+            onInterceptTouchEventUp.setActive(true);
+            onInterceptTouchEventUp.setNum(LogUtils.getCountNum(ev));
+            if (null != mListener) {
+                mListener.onUp();
+            }
+        }
         return mInterceptTouchEvent;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         LogUtils.log(mTag, LogUtils.METHOD_ON_TOUCH_EVENT, event, mTouchEvent, mBackgroundColor);
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            onTouchEventDown.setActive(true);
+            onTouchEventDown.setNum(LogUtils.getCountNum(event));
+            if (null != mListener) {
+                mListener.onDown();
+            }
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            onTouchEventUp.setActive(true);
+            onTouchEventUp.setNum(LogUtils.getCountNum(event));
+            if (null != mListener) {
+                mListener.onUp();
+            }
+        }
         return mTouchEvent;
     }
 
@@ -97,44 +138,81 @@ public class TouchLogView extends FrameLayout {
         return mBackgroundColor;
     }
 
-    private boolean hitDispatchTouchEvent_Down = false;
-    private boolean hitOnInterceptTouchEvent_Down = false;
-    private boolean hitOnTouchEvent_Down = false;
+    public void clear() {
+        dispatchTouchEventDown.clear();
+        onInterceptTouchEventDown.clear();
+        onTouchEventDown.clear();
 
-    public boolean getHitDispatchTouchEvent_Down() {
-        return hitDispatchTouchEvent_Down;
+        dispatchTouchEventUp.clear();
+        onInterceptTouchEventUp.clear();
+        onTouchEventUp.clear();
     }
 
-    public boolean getHitOnInterceptTouchEvent_Down() {
-        return hitOnInterceptTouchEvent_Down;
+    Status dispatchTouchEventDown = new Status();
+    Status onInterceptTouchEventDown = new Status();
+    Status onTouchEventDown = new Status();
+
+    Status dispatchTouchEventUp = new Status();
+    Status onInterceptTouchEventUp = new Status();
+    Status onTouchEventUp = new Status();
+
+    public Status getDispatchTouchEventDown() {
+        return dispatchTouchEventDown;
     }
 
-    public boolean getHitOnTouchEvent_Down() {
-        return hitOnTouchEvent_Down;
+    public Status getOnInterceptTouchEventDown() {
+        return onInterceptTouchEventDown;
     }
 
-    private boolean hitDispatchTouchEvent_MoveOrUp = false;
-    private boolean hitOnInterceptTouchEvent_MoveOrUp = false;
-    private boolean hitOnTouchEvent_MoveOrUp = false;
-
-    public boolean getHitDispatchTouchEvent_MoveOrUp() {
-        return hitDispatchTouchEvent_MoveOrUp;
+    public Status getOnTouchEventDown() {
+        return onTouchEventDown;
     }
 
-    public boolean getHitOnInterceptTouchEvent_MoveOrUp() {
-        return hitOnInterceptTouchEvent_MoveOrUp;
+    public Status getDispatchTouchEventUp() {
+        return dispatchTouchEventUp;
     }
 
-    public boolean getHitOnTouchEvent_MoveOrUp() {
-        return hitOnTouchEvent_MoveOrUp;
+    public Status getOnInterceptTouchEventUp() {
+        return onInterceptTouchEventUp;
     }
 
-    private void clear() {
-        hitDispatchTouchEvent_Down = false;
-        hitOnInterceptTouchEvent_Down = false;
-        hitOnTouchEvent_Down = false;
-        hitDispatchTouchEvent_MoveOrUp = false;
-        hitOnInterceptTouchEvent_MoveOrUp = false;
-        hitOnTouchEvent_MoveOrUp = false;
+    public Status getOnTouchEventUp() {
+        return onTouchEventUp;
+    }
+
+    public class Status {
+        boolean active = false;
+        int num = 0;
+
+        public boolean isActive() {
+            return active;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setActive(boolean value) {
+            active = value;
+        }
+
+        public void setNum(int value) {
+            num = value;
+        }
+
+        void clear() {
+            active = false;
+            num = 0;
+        }
+    }
+
+    public interface onMotionUpdateListener {
+        void onDown();
+        void onUp();
+    }
+
+    onMotionUpdateListener mListener;
+    public void setOnMotionUpdateListener(onMotionUpdateListener listener) {
+        mListener = listener;
     }
 }
