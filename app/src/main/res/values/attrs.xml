@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TouchLogView">
+        <attr name="tvTag" format="string"/>
+        <attr name="tvInterceptTouchEvent" format="boolean"/>
+        <attr name="tvTouchEvent" format="boolean"/>
+        <attr name="tvBackgroundColor" format="reference" />
+    </declare-styleable>
+</resources>
