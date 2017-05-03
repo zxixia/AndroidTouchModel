@@ -1,119 +1,241 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_control_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:background="@android:color/darker_gray"
+        />
     <LinearLayout
-        android:id="@+id/top_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp">
+
+            <FrameLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/gray">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="D" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <FrameLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/gray">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="I" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <FrameLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/gray">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="T" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_first_active_route"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Main"
-                android:layout_gravity="center"/>
+            android:layout_weight="1">
+        </android.support.v7.widget.RecyclerView>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            />
 
-            <CheckBox
-                android:id="@+id/rb_main_touch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击"></CheckBox>
-        </LinearLayout>
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp">
+
+            <FrameLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/gray">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="D" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <FrameLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/gray">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="I" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:background="@android:color/darker_gray"
+                />
+
+            <FrameLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@color/gray">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="T" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_second_active_route"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="First"
-                android:layout_gravity="center"/>
-
-            <CheckBox
-                android:id="@+id/rb_first_inter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="拦截"></CheckBox>
-
-            <CheckBox
-                android:id="@+id/rb_first_touch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击"></CheckBox>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Second"
-                android:layout_gravity="center"/>
-
-            <CheckBox
-                android:id="@+id/rb_second_inter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="拦截"></CheckBox>
-
-            <CheckBox
-                android:id="@+id/rb_second_touch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击"></CheckBox>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Third"
-                android:layout_gravity="center"/>
-
-            <CheckBox
-                android:id="@+id/rb_third_inter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="拦截"></CheckBox>
-
-            <CheckBox
-                android:id="@+id/rb_third_touch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击"></CheckBox>
-        </LinearLayout>
+            android:layout_weight="1">
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-    <net.jiawa.androidtouchmodel.FirstFrameLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:background="@android:color/darker_gray"
+        />
+    <net.jiawa.androidtouchmodel.TouchLogView
+        android:id="@+id/touch_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ff0000"
-        android:layout_below="@id/top_panel">
-        <net.jiawa.androidtouchmodel.SecondRelativeLayout
-            android:layout_width="250dip"
-            android:layout_height="250dip"
-            android:layout_gravity="center"
-            android:background="#00ff00">
+        android:background="@color/chi_dark"
+        android:paddingTop="65dp"
+        app:tvInterceptTouchEvent="false"
+        app:tvTouchEvent="false"
+        app:tvTag="@string/name_1"
+        app:tvBackgroundColor="@color/chi_light"
+        app:tvIsRoot="true">
+        <net.jiawa.androidtouchmodel.TouchLogView
+            android:id="@+id/touch_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cheng_dark"
+            android:paddingTop="65dp"
+            app:tvInterceptTouchEvent="false"
+            app:tvTouchEvent="false"
+            app:tvTag="@string/name_2"
+            app:tvBackgroundColor="@color/cheng_light">
+            <net.jiawa.androidtouchmodel.TouchLogView
+                android:id="@+id/touch_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/lv_dark"
+                android:paddingTop="65dp"
+                app:tvInterceptTouchEvent="false"
+                app:tvTouchEvent="false"
+                app:tvTag="@string/name_3"
+                app:tvBackgroundColor="@color/lv_light">
+                <net.jiawa.androidtouchmodel.TouchLogView
+                    android:id="@+id/touch_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/qing_dark"
+                    android:paddingTop="65dp"
+                    app:tvInterceptTouchEvent="false"
+                    app:tvTouchEvent="false"
+                    app:tvTag="@string/name_4"
+                    app:tvBackgroundColor="@color/qing_light">
+                    <net.jiawa.androidtouchmodel.TouchLogView
+                        android:id="@+id/touch_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/zi_dark"
+                        android:paddingTop="65dp"
+                        app:tvInterceptTouchEvent="false"
+                        app:tvTouchEvent="false"
+                        app:tvTag="@string/name_5"
+                        app:tvBackgroundColor="@color/zi_light">
+                    </net.jiawa.androidtouchmodel.TouchLogView>
+                </net.jiawa.androidtouchmodel.TouchLogView>
+            </net.jiawa.androidtouchmodel.TouchLogView>
+        </net.jiawa.androidtouchmodel.TouchLogView>
+    </net.jiawa.androidtouchmodel.TouchLogView>
 
-            <net.jiawa.androidtouchmodel.ThirdTextView
-                android:layout_width="100dip"
-                android:layout_height="100dip"
-                android:layout_centerInParent="true"
-                android:background="#0000ff" />
-        </net.jiawa.androidtouchmodel.SecondRelativeLayout>
-
-    </net.jiawa.androidtouchmodel.FirstFrameLayout>
-
-</RelativeLayout>
+</LinearLayout>
