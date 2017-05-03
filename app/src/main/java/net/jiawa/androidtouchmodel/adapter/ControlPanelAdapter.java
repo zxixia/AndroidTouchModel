@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import net.jiawa.androidtouchmodel.R;
@@ -14,7 +15,7 @@ import net.jiawa.androidtouchmodel.TouchLogView;
  * Created by zhaoxin5 on 2017/5/3.
  */
 
-public class ControlPanelAdapter extends BaseRecyclerAdapter<TouchLogView> {
+public class ControlPanelAdapter extends BaseRecyclerAdapter<TouchLogView> implements CheckBox.OnCheckedChangeListener {
 
     public ControlPanelAdapter(Context context) {
         super(context, BaseRecyclerAdapter.NEITHER);
@@ -29,9 +30,32 @@ public class ControlPanelAdapter extends BaseRecyclerAdapter<TouchLogView> {
     protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, TouchLogView item, int position) {
         ControlPanelHolder h = (ControlPanelHolder) holder;
         h.touch.setChecked(item.getTouchEvent());
+        h.touch.setOnCheckedChangeListener(this);
+        h.touch.setTag(R.id.cb_touch, position);
         h.intercept.setChecked(item.getInterceptTouchEvent());
+        h.intercept.setOnCheckedChangeListener(this);
+        h.intercept.setTag(R.id.cb_intercept, position);
         h.name.setText(item.getName());
         h.root.setBackgroundColor(item.getBackgroundColor());
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        int id = buttonView.getId();
+        int position = -1;
+        TouchLogView touchLogView = null;
+        switch (id) {
+            case R.id.cb_intercept:
+                position = (int) buttonView.getTag(R.id.cb_intercept);
+                touchLogView = getItem(position);
+                touchLogView.setInterceptTouchEvent(isChecked);
+                break;
+            case R.id.cb_touch:
+                position = (int) buttonView.getTag(R.id.cb_touch);
+                touchLogView = getItem(position);
+                touchLogView.setTouchEvent(isChecked);
+                break;
+        }
     }
 
     private static class ControlPanelHolder extends RecyclerView.ViewHolder {
@@ -49,4 +73,6 @@ public class ControlPanelAdapter extends BaseRecyclerAdapter<TouchLogView> {
             touch = (CheckBox) itemView.findViewById(R.id.cb_touch);
         }
     }
+
+
 }

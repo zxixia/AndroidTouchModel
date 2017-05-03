@@ -18,6 +18,7 @@ public class TouchLogView extends FrameLayout {
     private boolean mInterceptTouchEvent = false;
     private boolean mTouchEvent = false;
     private int mBackgroundColor = -1;
+    private boolean mIsRoot = false;
 
     public TouchLogView(Context context) {
         super(context);
@@ -48,6 +49,7 @@ public class TouchLogView extends FrameLayout {
                 mInterceptTouchEvent = ta.getBoolean(R.styleable.TouchLogView_tvInterceptTouchEvent, false);
                 mTouchEvent = ta.getBoolean(R.styleable.TouchLogView_tvTouchEvent, false);
                 mBackgroundColor = ta.getColor(R.styleable.TouchLogView_tvBackgroundColor, context.getResources().getColor(R.color.cheng_light));
+                mIsRoot = ta.getBoolean(R.styleable.TouchLogView_tvIsRoot, false);
                 ta.recycle();
             }
         }
@@ -55,6 +57,9 @@ public class TouchLogView extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (mIsRoot && ev.getAction() == MotionEvent.ACTION_DOWN) {
+            LogUtils.logEmptyLine();
+        }
         LogUtils.log(mTag, LogUtils.METHOD_DISPATCH_TOUCH_EVENT, ev);
         return super.dispatchTouchEvent(ev);
     }

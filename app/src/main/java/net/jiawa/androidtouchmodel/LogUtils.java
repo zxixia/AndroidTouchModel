@@ -103,4 +103,7 @@ public class LogUtils {
 		Log.d(TAG, sb.toString());
 	}
 
+	public static void logEmptyLine() {
+		Log.d(TAG, "\n\n\n\n\n");
+	}
 }

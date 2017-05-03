@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         mList.add((TouchLogView) findViewById(R.id.touch_2));
         mList.add((TouchLogView) findViewById(R.id.touch_3));
         mList.add((TouchLogView) findViewById(R.id.touch_4));
-        mList.add((TouchLogView) findViewById(R.id.touch_5));
 
         mControlPanel.setAdapter(mControlPanelAdapter);
         mControlPanelAdapter.resetItem(mList);

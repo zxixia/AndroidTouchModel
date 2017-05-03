@@ -24,8 +24,9 @@
         android:paddingTop="100dp"
         app:tvInterceptTouchEvent="false"
         app:tvTouchEvent="false"
-        app:tvTag="--01--"
-        app:tvBackgroundColor="@color/chi_light">
+        app:tvTag="111111"
+        app:tvBackgroundColor="@color/chi_light"
+        app:tvIsRoot="true">
         <net.jiawa.androidtouchmodel.TouchLogView
             android:id="@+id/touch_2"
             android:layout_width="match_parent"
@@ -34,7 +35,7 @@
             android:paddingTop="100dp"
             app:tvInterceptTouchEvent="true"
             app:tvTouchEvent="false"
-            app:tvTag="--02--"
+            app:tvTag="222222"
             app:tvBackgroundColor="@color/cheng_light">
             <net.jiawa.androidtouchmodel.TouchLogView
                 android:id="@+id/touch_3"
@@ -44,7 +45,7 @@
                 android:paddingTop="100dp"
                 app:tvInterceptTouchEvent="false"
                 app:tvTouchEvent="false"
-                app:tvTag="--03--"
+                app:tvTag="333333"
                 app:tvBackgroundColor="@color/lv_light">
                 <net.jiawa.androidtouchmodel.TouchLogView
                     android:id="@+id/touch_4"
@@ -54,20 +55,8 @@
                     android:paddingTop="100dp"
                     app:tvInterceptTouchEvent="false"
                     app:tvTouchEvent="false"
-                    app:tvTag="--04--"
+                    app:tvTag="444444"
                     app:tvBackgroundColor="@color/qing_light">
-                    <net.jiawa.androidtouchmodel.TouchLogView
-                        android:id="@+id/touch_5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/lan_dark"
-                        android:paddingTop="100dp"
-                        app:tvInterceptTouchEvent="false"
-                        app:tvTouchEvent="false"
-                        app:tvTag="--05--"
-                        app:tvBackgroundColor="@color/lan_light">
-
-                    </net.jiawa.androidtouchmodel.TouchLogView>
                 </net.jiawa.androidtouchmodel.TouchLogView>
             </net.jiawa.androidtouchmodel.TouchLogView>
         </net.jiawa.androidtouchmodel.TouchLogView>
