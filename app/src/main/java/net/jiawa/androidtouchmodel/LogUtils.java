@@ -3,7 +3,10 @@ package net.jiawa.androidtouchmodel;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import net.jiawa.androidtouchmodel.bean.Route;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class LogUtils {
@@ -16,13 +19,6 @@ public class LogUtils {
 	public static String METHOD_DISPATCH_TOUCH_EVENT = "dispatchTouchEvent";
 	public static String METHOD_ON_INTERCEPT_TOUCH_EVENT = "onInterceptTouchEvent";
 	public static String METHOD_ON_TOUCH_EVENT = "onTouchEvent";
-
-	public static String name_1 = "--11--";
-	public static String name_2 = "--22--";
-	public static String name_3 = "--33--";
-	public static String name_4 = "--44--";
-	public static String name_5 = "--55--";
-	public static String name_6 = "--66--";
 
 	public static String getEvent( MotionEvent event) {
 		String motionEvent = "";
@@ -62,41 +58,19 @@ public class LogUtils {
 		return getMaxLength("DOWN", "MOVE", "UP");
 	}
 
-	public static void printLog(Class clazz,String method, MotionEvent ev){
-		Log.d(TAG,
-				format(clazz.getSimpleName(), getClassLength())
-					   + ", " +
-				format(method, getMethodLength())
-					   + ", " +
-				format(getEvent(ev), getEventLength())
-			 );
-	}
-
-	public static void printLog(Class clazz,String method, MotionEvent ev, boolean eat){
-		Log.d(TAG,
-				format(clazz.getSimpleName(), getClassLength())
-						+ ", " +
-						format(method, getMethodLength())
-						+ ", " +
-						format(getEvent(ev), getEventLength())
-						+ ", " +
-						"EAT: " + eat
-		);
-	}
-
-	public static void log(String name, String method, MotionEvent event) {
+	public static void log(String name, String method, MotionEvent event, int color) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name);
 		sb.append(",  ");
 		sb.append(format(method, getMethodLength()));
 		sb.append(",  ");
 		sb.append(format(getEvent(event),5 ));
-		if (canLog(event, sb.toString())) {
+		if (canLog(name, method, event, sb.toString(), color)) {
 			Log.d(TAG, format(getCount(event), 6) + ",  " + sb.toString());
 		}
 	}
 
-	public static void log(String name, String method, MotionEvent event, boolean eat) {
+	public static void log(String name, String method, MotionEvent event, boolean eat, int color) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name);
 		sb.append(",  ");
@@ -106,7 +80,7 @@ public class LogUtils {
 		sb.append(",  ");
 		sb.append(eat ? " O " : " X ");
 
-		if (canLog(event, sb.toString())) {
+		if (canLog(name, method, event, sb.toString(), color)) {
 			Log.d(TAG, format(getCount(event), 6) + ",  " + sb.toString());
 		}
 	}
@@ -120,8 +94,9 @@ public class LogUtils {
 		mCache.clear();
 	}
 
-	private static boolean canLog(MotionEvent event, String str) {
+	private static boolean canLog(String name, String method, MotionEvent event, String str, int color) {
 		if (event.getAction() != MotionEvent.ACTION_MOVE) {
+			logFirst(name, method, event, color);
 			return true;
 		}
 		if (mCache.contains(str)) {
@@ -184,6 +159,41 @@ public class LogUtils {
 		clearCache();
 		clearCount();
 		logEmptyLine();
+		mFirst.clear();
 		printHead();
+	}
+
+	static HashMap<String, Route> mFirst = new HashMap<String, Route>();
+	public static HashMap<String, Route> getFirst() {
+		return mFirst;
+	}
+
+	private static void logFirst(String name, String method, MotionEvent event, int color) {
+		if (event.getAction() != MotionEvent.ACTION_DOWN) {
+			return;
+		}
+		Route route = mFirst.get(name);
+		if (null == route) {
+			route = new Route(color);
+		}
+
+		updateRoute(route, method, sDonwCount + 1);
+		mFirst.put(name, route);
+	}
+
+	private static void updateRoute(Route route, String method, int count) {
+		if (method.equals(METHOD_DISPATCH_TOUCH_EVENT)) {
+			route.getDispatchTouchEvent().setActive(true);
+			route.getDispatchTouchEvent().setNum(count);
+		}
+		if (method.equals(METHOD_ON_INTERCEPT_TOUCH_EVENT)) {
+			route.getOnInterceptTouchEvent().setActive(true);
+			route.getOnInterceptTouchEvent().setNum(count);
+
+		}
+		if (method.equals(METHOD_ON_TOUCH_EVENT)) {
+			route.getOnTouchEvent().setActive(true);
+			route.getOnTouchEvent().setNum(count);
+		}
 	}
 }

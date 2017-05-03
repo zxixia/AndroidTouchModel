@@ -61,19 +61,19 @@ public class TouchLogView extends FrameLayout {
         if (mIsRoot && ev.getAction() == MotionEvent.ACTION_DOWN) {
             LogUtils.clear();
         }
-        LogUtils.log(mTag, LogUtils.METHOD_DISPATCH_TOUCH_EVENT, ev);
+        LogUtils.log(mTag, LogUtils.METHOD_DISPATCH_TOUCH_EVENT, ev, mBackgroundColor);
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        LogUtils.log(mTag, LogUtils.METHOD_ON_INTERCEPT_TOUCH_EVENT, ev, mInterceptTouchEvent);
+        LogUtils.log(mTag, LogUtils.METHOD_ON_INTERCEPT_TOUCH_EVENT, ev, mInterceptTouchEvent, mBackgroundColor);
         return mInterceptTouchEvent;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        LogUtils.log(mTag, LogUtils.METHOD_ON_TOUCH_EVENT, event, mTouchEvent);
+        LogUtils.log(mTag, LogUtils.METHOD_ON_TOUCH_EVENT, event, mTouchEvent, mBackgroundColor);
         return mTouchEvent;
     }
 
@@ -95,5 +95,46 @@ public class TouchLogView extends FrameLayout {
 
     public int getBackgroundColor() {
         return mBackgroundColor;
+    }
+
+    private boolean hitDispatchTouchEvent_Down = false;
+    private boolean hitOnInterceptTouchEvent_Down = false;
+    private boolean hitOnTouchEvent_Down = false;
+
+    public boolean getHitDispatchTouchEvent_Down() {
+        return hitDispatchTouchEvent_Down;
+    }
+
+    public boolean getHitOnInterceptTouchEvent_Down() {
+        return hitOnInterceptTouchEvent_Down;
+    }
+
+    public boolean getHitOnTouchEvent_Down() {
+        return hitOnTouchEvent_Down;
+    }
+
+    private boolean hitDispatchTouchEvent_MoveOrUp = false;
+    private boolean hitOnInterceptTouchEvent_MoveOrUp = false;
+    private boolean hitOnTouchEvent_MoveOrUp = false;
+
+    public boolean getHitDispatchTouchEvent_MoveOrUp() {
+        return hitDispatchTouchEvent_MoveOrUp;
+    }
+
+    public boolean getHitOnInterceptTouchEvent_MoveOrUp() {
+        return hitOnInterceptTouchEvent_MoveOrUp;
+    }
+
+    public boolean getHitOnTouchEvent_MoveOrUp() {
+        return hitOnTouchEvent_MoveOrUp;
+    }
+
+    private void clear() {
+        hitDispatchTouchEvent_Down = false;
+        hitOnInterceptTouchEvent_Down = false;
+        hitOnTouchEvent_Down = false;
+        hitDispatchTouchEvent_MoveOrUp = false;
+        hitOnInterceptTouchEvent_MoveOrUp = false;
+        hitOnTouchEvent_MoveOrUp = false;
     }
 }

@@ -16,6 +16,35 @@
         android:paddingRight="2dp"
         android:background="@android:color/darker_gray"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_first_active_route"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </android.support.v7.widget.RecyclerView>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_second_active_route"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:background="@android:color/darker_gray"
+        />
     <net.jiawa.androidtouchmodel.TouchLogView
         android:id="@+id/touch_1"
         android:layout_width="match_parent"
@@ -24,7 +53,7 @@
         android:paddingTop="100dp"
         app:tvInterceptTouchEvent="false"
         app:tvTouchEvent="false"
-        app:tvTag="--1--"
+        app:tvTag="@string/name_1"
         app:tvBackgroundColor="@color/chi_light"
         app:tvIsRoot="true">
         <net.jiawa.androidtouchmodel.TouchLogView
@@ -35,7 +64,7 @@
             android:paddingTop="100dp"
             app:tvInterceptTouchEvent="false"
             app:tvTouchEvent="false"
-            app:tvTag="--2--"
+            app:tvTag="@string/name_2"
             app:tvBackgroundColor="@color/cheng_light">
             <net.jiawa.androidtouchmodel.TouchLogView
                 android:id="@+id/touch_3"
@@ -45,7 +74,7 @@
                 android:paddingTop="100dp"
                 app:tvInterceptTouchEvent="false"
                 app:tvTouchEvent="false"
-                app:tvTag="--3--"
+                app:tvTag="@string/name_3"
                 app:tvBackgroundColor="@color/lv_light">
                 <net.jiawa.androidtouchmodel.TouchLogView
                     android:id="@+id/touch_4"
@@ -55,7 +84,7 @@
                     android:paddingTop="100dp"
                     app:tvInterceptTouchEvent="false"
                     app:tvTouchEvent="false"
-                    app:tvTag="--4--"
+                    app:tvTag="@string/name_4"
                     app:tvBackgroundColor="@color/qing_light">
                 </net.jiawa.androidtouchmodel.TouchLogView>
             </net.jiawa.androidtouchmodel.TouchLogView>

@@ -36,7 +36,7 @@ public class ControlPanelAdapter extends BaseRecyclerAdapter<TouchLogView> imple
         h.intercept.setOnCheckedChangeListener(this);
         h.intercept.setTag(R.id.cb_intercept, position);
         h.name.setText(item.getName());
-        h.root.setBackgroundColor(item.getBackgroundColor());
+        h.name.setBackgroundColor(item.getBackgroundColor());
     }
 
     @Override

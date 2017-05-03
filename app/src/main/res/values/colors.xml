@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="gray">#80bebebe</color>
     <!-- 七彩标准色 -->
     <color name="chi_dark">#ffe06f99</color>
     <color name="chi_middle">#fff0a8c0</color>
