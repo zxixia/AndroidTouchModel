@@ -201,6 +201,12 @@
             </FrameLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_second_active_route"
             android:layout_width="0dp"
