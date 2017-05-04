@@ -32,7 +32,6 @@
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:background="@android:color/darker_gray"
-            android:layout_marginLeft="2dp"
             />
         <TextView
             android:layout_width="0dp"
