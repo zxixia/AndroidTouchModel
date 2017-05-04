@@ -59,13 +59,23 @@ public class TouchLogView extends FrameLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (mIsRoot && ev.getAction() == MotionEvent.ACTION_DOWN) {
             LogUtils.clear();
+            if (null != clearAllCallback) {
+                clearAllCallback.clear(true);
+            }
         }
-        LogUtils.log(mTag, LogUtils.METHOD_DISPATCH_TOUCH_EVENT, ev, mBackgroundColor);
+        boolean result = LogUtils.log(mTag, LogUtils.METHOD_DISPATCH_TOUCH_EVENT, ev, mBackgroundColor);
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             dispatchTouchEventDown.setActive(true);
             dispatchTouchEventDown.setNum(LogUtils.getCountNum(ev));
             if (null != mListener) {
                 mListener.onDown();
+            }
+        }
+        if ((ev.getAction() == MotionEvent.ACTION_MOVE) && result) {
+            dispatchTouchEventUp.setActive(true);
+            dispatchTouchEventUp.setNum(LogUtils.getCountNum(ev));
+            if (null != mListener) {
+                mListener.onUp();
             }
         }
         if (ev.getAction() == MotionEvent.ACTION_UP) {
@@ -80,12 +90,19 @@ public class TouchLogView extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        LogUtils.log(mTag, LogUtils.METHOD_ON_INTERCEPT_TOUCH_EVENT, ev, mInterceptTouchEvent, mBackgroundColor);
+        boolean result = LogUtils.log(mTag, LogUtils.METHOD_ON_INTERCEPT_TOUCH_EVENT, ev, mInterceptTouchEvent, mBackgroundColor);
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             onInterceptTouchEventDown.setActive(true);
             onInterceptTouchEventDown.setNum(LogUtils.getCountNum(ev));
             if (null != mListener) {
                 mListener.onDown();
+            }
+        }
+        if ((ev.getAction() == MotionEvent.ACTION_MOVE) && result) {
+            onInterceptTouchEventUp.setActive(true);
+            onInterceptTouchEventUp.setNum(LogUtils.getCountNum(ev));
+            if (null != mListener) {
+                mListener.onUp();
             }
         }
         if (ev.getAction() == MotionEvent.ACTION_UP) {
@@ -100,12 +117,19 @@ public class TouchLogView extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        LogUtils.log(mTag, LogUtils.METHOD_ON_TOUCH_EVENT, event, mTouchEvent, mBackgroundColor);
+        boolean result = LogUtils.log(mTag, LogUtils.METHOD_ON_TOUCH_EVENT, event, mTouchEvent, mBackgroundColor);
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             onTouchEventDown.setActive(true);
             onTouchEventDown.setNum(LogUtils.getCountNum(event));
             if (null != mListener) {
                 mListener.onDown();
+            }
+        }
+        if ((event.getAction() == MotionEvent.ACTION_MOVE) && result) {
+            onTouchEventUp.setActive(true);
+            onTouchEventUp.setNum(LogUtils.getCountNum(event));
+            if (null != mListener) {
+                mListener.onUp();
             }
         }
         if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -138,14 +162,20 @@ public class TouchLogView extends FrameLayout {
         return mBackgroundColor;
     }
 
-    public void clear() {
-        dispatchTouchEventDown.clear();
-        onInterceptTouchEventDown.clear();
-        onTouchEventDown.clear();
+    public void clear(boolean all) {
+        if (all) {
+            dispatchTouchEventDown.clear();
+            onInterceptTouchEventDown.clear();
+            onTouchEventDown.clear();
 
-        dispatchTouchEventUp.clear();
-        onInterceptTouchEventUp.clear();
-        onTouchEventUp.clear();
+            dispatchTouchEventUp.clear();
+            onInterceptTouchEventUp.clear();
+            onTouchEventUp.clear();
+        } else {
+            dispatchTouchEventUp.clear();
+            onInterceptTouchEventUp.clear();
+            onTouchEventUp.clear();
+        }
     }
 
     Status dispatchTouchEventDown = new Status();
@@ -214,5 +244,13 @@ public class TouchLogView extends FrameLayout {
     onMotionUpdateListener mListener;
     public void setOnMotionUpdateListener(onMotionUpdateListener listener) {
         mListener = listener;
+    }
+
+    public interface clearAllCallback {
+        void clear(boolean all);
+    }
+    clearAllCallback clearAllCallback;
+    public void setClearAllCallback(clearAllCallback clearAllCallback) {
+        this.clearAllCallback = clearAllCallback;
     }
 }

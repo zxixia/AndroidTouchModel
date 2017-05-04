@@ -56,7 +56,7 @@ public class LogUtils {
 		return getMaxLength("DOWN", "MOVE", "UP");
 	}
 
-	public static void log(String name, String method, MotionEvent event, int color) {
+	public static boolean log(String name, String method, MotionEvent event, int color) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name);
 		sb.append(",  ");
@@ -65,10 +65,12 @@ public class LogUtils {
 		sb.append(format(getEvent(event),5 ));
 		if (canLog(name, method, event, sb.toString(), color)) {
 			Log.d(TAG, format(getCount(event), 6) + ",  " + sb.toString());
+			return true;
 		}
+		return false;
 	}
 
-	public static void log(String name, String method, MotionEvent event, boolean eat, int color) {
+	public static boolean log(String name, String method, MotionEvent event, boolean eat, int color) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name);
 		sb.append(",  ");
@@ -80,7 +82,9 @@ public class LogUtils {
 
 		if (canLog(name, method, event, sb.toString(), color)) {
 			Log.d(TAG, format(getCount(event), 6) + ",  " + sb.toString());
+			return true;
 		}
+		return false;
 	}
 
 	private static void logEmptyLine() {

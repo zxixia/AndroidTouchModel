@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import net.jiawa.androidtouchmodel.adapter.BaseRecyclerAdapter;
@@ -13,7 +14,8 @@ import net.jiawa.androidtouchmodel.adapter.TouchRouteAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements TouchLogView.onMotionUpdateListener {
+public class MainActivity extends AppCompatActivity implements TouchLogView.onMotionUpdateListener,
+        TouchLogView.clearAllCallback {
 
     RecyclerView mControlPanel;
     BaseRecyclerAdapter<TouchLogView> mControlPanelAdapter;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements TouchLogView.onMo
         mControlPanelAdapter = new ControlPanelAdapter(this);
         TouchLogView touchLogView = (TouchLogView) findViewById(R.id.touch_1);
         touchLogView.setOnMotionUpdateListener(this);
+        touchLogView.setClearAllCallback(this);
         mList.add(touchLogView);
 
         touchLogView = (TouchLogView) findViewById(R.id.touch_2);
@@ -98,14 +101,19 @@ public class MainActivity extends AppCompatActivity implements TouchLogView.onMo
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            for (TouchLogView touchLogView : mList) {
-                touchLogView.clear();
-            }
+    public void clear(boolean all) {
+        for (TouchLogView touchLogView : mList) {
+            touchLogView.clear(all);
         }
         mFirstRouteAdapter.resetItem(mList);
         mSecondRouteAdapter.resetItem(mList);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_UP) {
+            clear(false);
+        }
         return super.dispatchTouchEvent(ev);
     }
 }
