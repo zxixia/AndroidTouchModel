@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 
 import net.jiawa.androidtouchmodel.adapter.BaseRecyclerAdapter;
 import net.jiawa.androidtouchmodel.adapter.ControlPanelAdapter;
@@ -109,9 +110,20 @@ public class MainActivity extends AppCompatActivity implements TouchLogView.onMo
         mSecondRouteAdapter.resetItem(mList);
     }
 
+    private boolean inChild(float x, float y) {
+        final TouchLogView root = (TouchLogView) this.findViewById(R.id.touch_1);
+        if (null != root) {
+            return !(y < root.getTop()
+                    || y >= root.getBottom()
+                    || x < root.getLeft()
+                    || x >= root.getRight());
+        }
+        return false;
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_UP) {
+        if (ev.getAction() == MotionEvent.ACTION_UP && inChild(ev.getX(), ev.getY())) {
             clear(false);
         }
         return super.dispatchTouchEvent(ev);
